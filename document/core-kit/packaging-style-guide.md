@@ -5,7 +5,7 @@ description: Procedure for editing Bottlerocket RPM spec files in core-kit and k
 
 # Editing RPM spec files
 
-Applies to every `.spec` under `packages/` in the kit repos (core-kit and kernel-kit). The packaging rules themselves are styleguide concepts under `styleguide/rpm-spec/` (`language: rpm-spec`), grouped by category: structure, numbering, patches, metadata, licensing, build, dependencies, paths, files, subpackages, fips, kernel-modules, systemd, formatting. Repo-level layout facts (Cargo.toml per package, `external-files`, patch series `0001-`/`9001-`) are in `document/core-kit/conventions`. `%{_cross_*}` macros are defined by the SDK.
+Applies to every `.spec` under `packages/` in the kit repos (core-kit and kernel-kit). The packaging rules themselves are styleguide concepts under `styleguide/rpm-spec/` (`language: rpm-spec`), grouped by category: structure, numbering, patches, metadata, licensing, build, dependencies, paths, files, subpackages, fips, kernel-modules, systemd, formatting, maintenance. Repo-level layout facts (Cargo.toml per package, `external-files`, patch series `0001-`/`9001-`) are in `document/core-kit/conventions`. `%{_cross_*}` macros are defined by the SDK. For the step-by-step editing procedure use `skill/edit-spec-file`; for version bumps see `document/core-kit/updating-third-party-packages`.
 
 ## Procedure
 
@@ -13,7 +13,7 @@ Applies to every `.spec` under `packages/` in the kit repos (core-kit and kernel
 2. Pick a similar reference package and follow its shape: Go `packages/nvidia-k8s-device-plugin/nvidia-k8s-device-plugin.spec`; C + systemd `packages/chrony/chrony.spec`; FIPS `-bin`/`-fips-bin` `packages/amazon-ssm-agent/amazon-ssm-agent.spec`; first-party Rust `packages/netdog/netdog.spec`.
 3. Edit in section order (`styleguide/rpm-spec/structure/section-order`).
 4. Review the result against the checklist below, ideally by a second reviewer who did not write the change.
-5. Commit with the message in a file (`git commit -s -F <msgfile>`, not `-m` with escaped `\n`). Header `package-name: summary` (`styleguide/general/commits/header-format`), then a body and `Signed-off-by`.
+5. Commit with the message in a file (`git commit -s -F <msgfile>`, not `-m` with escaped `\n`). Header `package-name: summary` (`styleguide/general/commits/header-format`), then a body and `Signed-off-by` (`styleguide/general/commits/message-body`).
 
 ## Validation checklist
 

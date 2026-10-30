@@ -6,6 +6,8 @@ category: metadata
 ---
 # Package naming
 
+The spec lives at `packages/<name>/<name>.spec`.
+
 ## Good
 
 ```spec

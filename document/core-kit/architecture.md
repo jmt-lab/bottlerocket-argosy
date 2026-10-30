@@ -65,7 +65,7 @@ make  →  tools/install-twoliter.sh (installs twoliter to tools/twoliter/)
 | apiclient | `api/apiclient` | CLI + library for the API (`get`, `set`, `update`, `exec`, `raw`, `network configure`) |
 | others | `api/certdog`, `corndog`, `host-containers`, `bootstrap-containers`, `prairiedog`, `thar-be-updates`, `thar-be-registries`, `simple-settings-plugin` | CA certs, sysctls, host/bootstrap containers, boot ops, update API backend, registry mirrors, settings plugin (uses `abi_stable`) |
 
-The settings **data model** lives in `sources/models` and delegates to a settings plugin (cdylib) loaded at runtime; model types come from the external [bottlerocket-settings-sdk](https://github.com/bottlerocket-os/bottlerocket-settings-sdk) (git dependency, see `document/tech`).
+The settings **data model** lives in `sources/models` and delegates to a settings plugin (cdylib) loaded at runtime; model types come from the external [bottlerocket-settings-sdk](https://github.com/bottlerocket-os/bottlerocket-settings-sdk) (git dependency, see `document/core-kit/tech`).
 
 ### Update system (`sources/updater/`)
 `updog` (TUF client via `tough`, downloads image to inactive partition, honors waves) → `signpost` (flips GPT priority bits so GRUB boots the new partition set); `update_metadata`, `block-party`, `waves` are libraries. Driven by `thar-be-updates` behind `apiclient update`. Long version: `sources/updater/README.md`.
@@ -91,4 +91,4 @@ The settings **data model** lives in `sources/models` and delegates to a setting
 ## 4. Periphery
 - `advisories/<kit-version>/BRSA-*.toml` — security / end-of-life advisories: `[advisory]` header plus `[[advisory.products]]` entries naming affected package and patched version/epoch, and an `[updateinfo]` block.
 - `tools/` — `install-twoliter.sh`, `validate-changelog.sh` (CI), `collect-kernel-config`/`diff-kernel-config` (kernel config diff helpers; they expect kernel RPMs that this kit does not build).
-- `.github/workflows/` — see `document/development`.
+- `.github/workflows/` — see `document/core-kit/development`.

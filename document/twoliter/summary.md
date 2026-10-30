@@ -11,7 +11,7 @@ description: One-page orientation — what Twoliter is, who uses it, and the sha
 |---|---|---|
 | Repo | `bottlerocket-os/twoliter` (this checkout tracks branch `develop`; PRs come from the `jmt-lab` fork) | `twoliter/Cargo.toml`, git log |
 | Current version | `0.24.1-rc2` (released 2026-09-03) | `twoliter/Cargo.toml`, `CHANGELOG.md` |
-| Language | Rust (nightly, pinned) + Bash helper scripts embedded in the binary | see `document/tech` |
+| Language | Rust (nightly, pinned) + Bash helper scripts embedded in the binary | see `document/twoliter/tech` |
 | Distribution | Static musl binaries for `x86_64`/`aarch64` on GitHub Releases via a `cargo-dist` fork; **not** on crates.io | `README.md` "Releasing", `.github/workflows/release.yml` |
 | License | MIT OR Apache-2.0 | `twoliter/Cargo.toml`, `LICENSE-*` |
 | Design doc | `docs/design/README.md` (long-form rationale; some sections describe plans that were never built — `twoliter new`, docker-socket-in-container — and are marked as such) | |
@@ -19,7 +19,7 @@ description: One-page orientation — what Twoliter is, who uses it, and the sha
 
 ## What the binary does
 
-`twoliter` is a single static binary that **embeds** everything a build needs except Docker and a Rust toolchain: the helper binaries (`buildsys`, `pubsys`, `pubsys-setup`, `pipesys`, `pcrsys`, `ukisys`, `unplug`, `eif-builder`, `advisory-checker`, `tuftool`, `krane`) and the build scripts (`Makefile.toml`, `build.Dockerfile`, `rpm2img`, `img2img`, …). On every run it extracts them into `<project>/build/tools/` and drives the build with `cargo make` against that `Makefile.toml`. See `document/architecture` for the flow.
+`twoliter` is a single static binary that **embeds** everything a build needs except Docker and a Rust toolchain: the helper binaries (`buildsys`, `pubsys`, `pubsys-setup`, `pipesys`, `pcrsys`, `ukisys`, `unplug`, `eif-builder`, `advisory-checker`, `tuftool`, `krane`) and the build scripts (`Makefile.toml`, `build.Dockerfile`, `rpm2img`, `img2img`, …). On every run it extracts them into `<project>/build/tools/` and drives the build with `cargo make` against that `Makefile.toml`. See `document/twoliter/architecture` for the flow.
 
 User-facing command surface (`twoliter/src/cmd/mod.rs`):
 
@@ -41,8 +41,8 @@ Global flags: `--log-level`, `-q/--quiet`; `RUST_LOG` is honored.
 | `twoliter/` | The CLI crate (`src/cmd`, `src/project`, `src/tools.rs`, `src/cargo_make.rs`) |
 | `twoliter/embedded/` | Bash scripts, `Makefile.toml`, `build.Dockerfile`, wave policies — tarred into the binary |
 | `twoliter/src/tool-crates/*` | Shim crates that embed each helper binary (via cargo `bindeps`) |
-| `tools/*` | The helper binaries and shared libraries (21 crates + scripts) — see `document/architecture` |
-| `tests/integration-tests/`, `tests/projects/*` | Integration test crate and fixture Twoliter projects — see `document/development` |
+| `tools/*` | The helper binaries and shared libraries (21 crates + scripts) — see `document/twoliter/architecture` |
+| `tests/integration-tests/`, `tests/projects/*` | Integration test crate and fixture Twoliter projects — see `document/twoliter/development` |
 | `docs/design/` | Design doc, custom-variant notes, PlantUML build-sequence diagram |
 
 ## Who works on it

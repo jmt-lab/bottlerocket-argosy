@@ -5,14 +5,14 @@ description: How to build, lint, test, and release Twoliter — the real command
 
 # Development
 
-Prerequisites (toolchain, Docker, cargo-make, gzip/lz4) are listed in `document/tech`. `rustup` picks the pinned nightly from `rust-toolchain.toml` automatically.
+Prerequisites (toolchain, Docker, cargo-make, gzip/lz4) are listed in `document/twoliter/tech`. `rustup` picks the pinned nightly from `rust-toolchain.toml` automatically.
 
 ## Everyday commands (root `Makefile`)
 
 | Command | What it runs | Notes |
 |---|---|---|
 | `make fmt` | `cargo fmt --check` | |
-| `make clippy` | `cargo clippy --locked -- -D warnings --no-deps` | `disallowed_methods` is deny-level (see `document/conventions`) |
+| `make clippy` | `cargo clippy --locked -- -D warnings --no-deps` | `disallowed_methods` is deny-level (see `document/twoliter/conventions`) |
 | `make deny` | `cargo deny --no-default-features check licenses bans sources` | needs `cargo install cargo-deny --locked` |
 | `make test` | `cargo test --release --locked` | whole workspace; includes `integ-tests` feature tests that are **not** `#[ignore]`d — slow |
 | `make integ` | `cargo test --manifest-path tests/integration-tests/Cargo.toml -- --include-ignored` | runs the Docker/network/full-build tests |
@@ -29,6 +29,8 @@ cargo test --no-default-features                              # skip integ-tests
 cargo test -p twoliter                                        # CLI unit tests only
 cross build --release --bin twoliter --target aarch64-unknown-linux-musl   # as CI cross-build does
 ```
+
+To exercise a local build against a real kit (`make build TWOLITER_DIR=…` in a kit checkout) or to roll a new release out to the kits and `bottlerocket`, see `document/twoliter/version-bump-and-local-testing`.
 
 First builds download the pinned `krane` tarball from `https://cache.bottlerocket.aws` (`tools/krane/build.rs`); set `UPSTREAM_SOURCE_FALLBACK=true` to allow GitHub as a fallback.
 

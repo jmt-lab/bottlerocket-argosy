@@ -52,10 +52,10 @@ Test layout: unit tests inline (`#[cfg(test)]`, ~100 files) plus `tests/` dirs i
 3. `make publish VENDOR=<name>` (= `twoliter publish kit bottlerocket-core-kit <vendor>`).
 4. In the variant repo's `Twoliter.toml`, add the vendor and point `[[kit]] bottlerocket-core-kit` at your version, then `./tools/twoliter/twoliter update`.
 
-Details: `BUILDING.md` §Publish / §Consuming.
+Details: `BUILDING.md` §Publish / §Consuming. For a credential-free loop against a local `registry:2` container with `Twoliter.override`, see `document/bottlerocket/local-kit-workflow`. Release preparation (version bump + CHANGELOG commits): `document/core-kit/release-process`.
 
 ## Adding or updating a package
-Follow `packages/README.md`: create `packages/<name>/{Cargo.toml,<name>.spec}` pointing at `../build.rs` and `../packages.rs`, list `external-files` with sha512, declare `[build-dependencies]`/`[dependencies]`, add the member to root `Cargo.toml` and to `kits/bottlerocket-core-kit/Cargo.toml` `[build-dependencies]`. Go modules without vendored deps need `bundle-modules = ["go"]`. Conventions in `document/conventions`.
+Follow `packages/README.md`: create `packages/<name>/{Cargo.toml,<name>.spec}` pointing at `../build.rs` and `../packages.rs`, list `external-files` with sha512, declare `[build-dependencies]`/`[dependencies]`, add the member to root `Cargo.toml` and to `kits/bottlerocket-core-kit/Cargo.toml` `[build-dependencies]`. Go modules without vendored deps need `bundle-modules = ["go"]`. Conventions in `document/core-kit/conventions`.
 
 ## CI workflows (`.github/workflows/`)
 

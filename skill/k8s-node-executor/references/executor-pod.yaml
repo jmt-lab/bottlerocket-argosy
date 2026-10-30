@@ -1,0 +1,30 @@
+# Privileged pod with host PID/IPC/network namespaces and the host root at /host.
+# Replace NODE_NAME (or delete the nodeName line to let the scheduler pick a Linux node).
+# This is root on the node: delete it as soon as you are done.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: br-executor
+spec:
+  nodeName: NODE_NAME
+  hostNetwork: true
+  hostPID: true
+  hostIPC: true
+  restartPolicy: Never
+  nodeSelector:
+    kubernetes.io/os: linux
+  tolerations:
+    - operator: Exists
+  containers:
+    - name: exec
+      image: public.ecr.aws/amazonlinux/amazonlinux:2023
+      command: ["sleep", "infinity"]
+      securityContext:
+        privileged: true
+      volumeMounts:
+        - name: host
+          mountPath: /host
+  volumes:
+    - name: host
+      hostPath:
+        path: /

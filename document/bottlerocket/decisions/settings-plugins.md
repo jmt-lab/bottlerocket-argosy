@@ -5,7 +5,7 @@ description: Why each variant's settings model is a runtime-loaded cdylib plugin
 
 # Decision: per-variant settings model as a runtime plugin
 
-**Date (from git):** `settings-plugins: add aws-k8s plugin` on 2024-06-01 (`a4d00d10`), coinciding with the kit split (`document/decisions/kits-and-twoliter`).
+**Date (from git):** `settings-plugins: add aws-k8s plugin` on 2024-06-01 (`a4d00d10`), coinciding with the kit split (`document/bottlerocket/decisions/kits-and-twoliter`).
 
 ## Context
 The API `Settings` type differs per variant (ECS vs Kubernetes vs dev). Before the kit split, `sources/models/src/<variant>/mod.rs` selected the struct at compile time, so the apiserver and every consumer had to be rebuilt per variant, which is incompatible with shipping one prebuilt apiserver in core-kit.

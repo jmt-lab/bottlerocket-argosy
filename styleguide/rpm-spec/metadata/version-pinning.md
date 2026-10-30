@@ -10,6 +10,7 @@ category: metadata
 - Pin git sources to a commit hash, not a branch.
 - The version must match the artifact actually fetched; never label a beta/alpha as a stable release.
 - Don't bump versions or releases without a functional reason.
+- Keep related version `%global`s together at the top of the spec and document any version constraint that is not obvious.
 
 ## Good
 

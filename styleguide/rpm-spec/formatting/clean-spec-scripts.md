@@ -11,6 +11,8 @@ category: formatting
 - Don't pre-initialise environment variables at the top of scripts; it clobbers values inherited from the SDK.
 - `pushd`/`popd` instead of bare `cd`.
 - Validate external input before using it.
+- Handle architecture differences with conditionals on the arch macros (`%ifarch`, `%{_cross_arch}`), not by hard-coding one architecture.
+- Factor repeated install or build steps into a loop or macro; remove intermediate build artifacts that are not packaged.
 - No trailing whitespace; consistent indentation and formatting with sibling specs.
 - Build on both x86_64 and aarch64 before submitting.
 

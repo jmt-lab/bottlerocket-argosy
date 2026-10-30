@@ -1,6 +1,6 @@
 ---
 type: Styleguide Rule
-description: "Split a change into commits by capability (a type with its implementation and tests, a command with its handler and tests), never by artifact; aim for 200–400 changed lines and at most 5–6 files per commit, never more than 500 lines."
+description: "Split a change into commits by capability (a type with its implementation and tests, a command with its handler and tests), never by artifact; target 200–400 changed lines and at most 5–6 files per commit, never more than 500 lines."
 language: general
 category: commits
 ---

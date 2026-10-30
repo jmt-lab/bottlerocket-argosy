@@ -6,7 +6,7 @@ category: testing
 ---
 # Given / When / Then
 
-Never remove these markers to shorten a file.
+Each marker may carry a short phrase describing that step (`// Given an empty string`). Never remove these markers to shorten a file.
 
 ## Good
 

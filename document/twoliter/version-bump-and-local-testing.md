@@ -28,12 +28,18 @@ Complements `document/twoliter/development` (building/releasing Twoliter itself)
    TWOLITER_SHA256_X86_64 = "<x86_64 sha>"
    ```
    `git add Makefile.toml && git commit -m "chore: bump to twoliter X.Y.Z"`
-4. Validate: each repo's `git show HEAD --stat` shows 1 file, 3 insertions, 3 deletions.
+4. Validate: each repo's `git show HEAD --stat` shows 1 file, 3 insertions, 3 deletions:
+   ```bash
+   for r in bottlerocket-core-kit bottlerocket-kernel-kit bottlerocket; do (cd "$r" && git show HEAD --stat); done
+   ```
 
-Notes: open one PR per repo; PRs trigger CI against the new Twoliter. Moving RC → stable: `git commit --amend`. Twoliter `schema-version` changes are rare — only touch them when release notes say so (kits and Twoliter must be bumped together when the schema changes). The kit repos' commitlint requires `scope: description` (`document/core-kit/conventions`); `chore: bump to twoliter X.Y.Z` matches that header regex.
+If the `.sha256` download fails, check that `https://github.com/bottlerocket-os/twoliter/releases/tag/vX.Y.Z` exists and has the musl tarballs attached.
+
+Notes: the bump only creates local commits — push and open one PR per repo yourself; PRs trigger CI against the new Twoliter. Moving RC → stable: edit the same three lines, then `git add <file> && git commit --amend -m "chore: bump to twoliter X.Y.Z"`. Twoliter `schema-version` changes are rare — only touch them when release notes say so (kits and Twoliter must be bumped together when the schema changes). The kit repos' commitlint requires `scope: description` (`document/core-kit/conventions`); `chore: bump to twoliter X.Y.Z` matches that header regex.
 
 ## B. Test a locally built Twoliter
 
+Twoliter CLI sources are under `twoliter/twoliter/src/`; the cargo-make tasks and scripts it embeds are under `twoliter/twoliter/embedded/`.
 ```bash
 cd twoliter && cargo build --release            # binary at target/release/twoliter
 cd ../bottlerocket-core-kit

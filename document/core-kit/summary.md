@@ -7,7 +7,7 @@ description: One-page orientation to bottlerocket-core-kit, the Twoliter "kit" o
 
 **What it is.** The core kit for [Bottlerocket](https://github.com/bottlerocket-os/bottlerocket), a Linux-based container host OS from AWS. A *kit* is a versioned bundle of pre-built RPM packages published as a container image (`public.ecr.aws/bottlerocket/bottlerocket-core-kit`) that downstream *variant* builds consume. This repo defines every package in that kit and holds the source for Bottlerocket's first-party userspace.
 
-**What it contains** (see `document/architecture` for detail):
+**What it contains** (see `document/core-kit/architecture` for detail):
 
 | Area | Path | Content |
 |---|---|---|
@@ -31,7 +31,7 @@ description: One-page orientation to bottlerocket-core-kit, the Twoliter "kit" o
 
 **Canonical long-form docs in the repo**
 
-- `README.md`, `BUILDING.md` — build & publish overview (distilled in `document/development`)
+- `README.md`, `BUILDING.md` — build & publish overview (distilled in `document/core-kit/development`)
 - `packages/README.md` — why RPM + containers + cross-compilation, and how to add a package
 - `sources/api/README.md` — the settings API system, in boot order
 - `sources/updater/README.md` — TUF-based update system (updog, signpost, waves)

@@ -92,7 +92,7 @@ Relevant knobs: `PUBLISH_REPO` (default `default`), `PUBLISH_INFRA_CONFIG_PATH`,
 `dependabot.yaml`: GitHub Actions weekly; cargo/gomod security-only (PR limit 0).
 
 ## Contribution workflow (`CONTRIBUTING.md`, `.github/pull_request_template.md`)
-Work against `develop`; open an issue first for significant work; PR template asks for issue number, description, testing done, and dual-license (Apache-2.0 OR MIT) agreement. Release tags are `vX.Y.Z`; patch branches `X.Y.x` only when needed. Commit message format is enforced — see `document/conventions`.
+Work against `develop`; open an issue first for significant work; PR template asks for issue number, description, testing done, and dual-license (Apache-2.0 OR MIT) agreement. Release tags are `vX.Y.Z`; patch branches `X.Y.x` only when needed. Commit message format is enforced — see `document/bottlerocket/conventions`.
 
 ## Common change recipes
 - **Test unreleased kit changes in a variant**: publish the kit to a local registry and redirect it with `Twoliter.override` — `document/bottlerocket/local-kit-workflow`.

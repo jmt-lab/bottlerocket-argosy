@@ -25,9 +25,9 @@ description: One-page orientation to bottlerocket-kernel-kit, the Twoliter "kit"
 
 **Where to go next**
 
-- How the build works and how packages fit together: `document/architecture`
-- Versions and toolchain: `document/tech`
-- Build / test / lint / publish commands: `document/development`
-- Commit, changelog and package-layout rules: `document/conventions`
-- Jargon (kit, buildsys, gptprio, BRSA, …): `document/glossary`
+- How the build works and how packages fit together: `document/kernel-kit/architecture`
+- Versions and toolchain: `document/kernel-kit/tech`
+- Build / test / lint / publish commands: `document/kernel-kit/development`
+- Commit, changelog and package-layout rules: `document/kernel-kit/conventions`
+- Jargon (kit, buildsys, gptprio, BRSA, …): `document/kernel-kit/glossary`
 - Canonical long-form docs in the repo: `README.md`, `BUILDING.md`, `CONTRIBUTING.md`, `packages/kernel-6.12/README.md`

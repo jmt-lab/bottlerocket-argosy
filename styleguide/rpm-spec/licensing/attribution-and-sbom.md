@@ -8,7 +8,7 @@ category: licensing
 
 - Main `%files` always contains `%{_cross_attribution_file}`.
 - Go/Rust packages scan vendored dependencies with `%cross_scan_attribution` (pass `--clarify <clarify.toml source>` when one exists) and list `%{_cross_attribution_vendor_dir}`.
-- SBOMs are produced by the SDK's `cross_generate_sbom` macro. Don't disable it; first-party specs redefine it at the top (`%global cross_generate_sbom %{shrink: … sbomtool generate --name <pkg> … }`), as in `packages/netdog/netdog.spec`.
+- SBOMs are produced by the SDK's `cross_generate_sbom` macro. Don't disable it; first-party specs redefine it at the top (`%global cross_generate_sbom %{shrink: … sbomtool generate --name <pkg> … }`), as in `packages/netdog/netdog.spec`. SBOM files land in `%{_cross_sbom_package_dir}`; don't move or delete them in `%install`.
 
 ## Good
 

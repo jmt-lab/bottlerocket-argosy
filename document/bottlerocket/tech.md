@@ -56,7 +56,7 @@ Kernels `kernel-6.1` (metal-dev) and `kernel-6.18` (others); `containerd-2.2`; `
 `sources/deny.toml`: allowed licenses Apache-2.0, BSD-3-Clause, ISC, MIT, Unlicense, Zlib, MPL-2.0, Unicode-3.0; `multiple-versions = "deny"` (skips for `syn 1`, `thiserror 1`, `windows-sys` tree); bans `structopt` and `clap` (except via cargo-readme); only git source allowed is bottlerocket-settings-sdk.
 
 ## Host build prerequisites
-See `document/development`.
+See `document/bottlerocket/development`.
 
 ## CI runners
-GitHub Actions on the `bottlerocket` runner group (`bottlerocket_ubuntu-latest_32-core` for builds, 8-core for cache); Docker with BuildKit; see `document/development`.
+GitHub Actions on the `bottlerocket` runner group (`bottlerocket_ubuntu-latest_32-core` for builds, 8-core for cache); Docker with BuildKit; see `document/bottlerocket/development`.

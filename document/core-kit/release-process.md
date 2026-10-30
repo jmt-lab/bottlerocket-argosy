@@ -21,10 +21,14 @@ Both signed-off and GPG-signed (`-s -S`). Messages follow the repo's `scope: des
 ```bash
 git log --oneline <last_tag>..HEAD                     # or --since="<last release date>" if untagged
 git log --merges --oneline <last_tag>..HEAD            # "Merge pull request #NNN" gives PR numbers
+git log --merges --grep="pull request" <last_tag>..HEAD   # same, filtered to PR merges
 git show <merge_commit> --stat                         # ALWAYS: see the actual files touched
 ```
+If merge commits show no PR numbers, scan `git log --merges --oneline | head -20` for the `Merge pull request #NNN` pattern, and confirm each number exists in the GitHub repo before citing it.
 
-**Never** categorise from commit summaries, branch names or assumptions. A single PR can be *mixed* — e.g. PR #760 touched `sources/host-ctr/` (first-party) **and** `packages/amazon-vpc-cni-plugins/`, `packages/ecs-agent/` (third-party) — and then needs one entry in each section.
+**Never** categorise from commit summaries, branch names or assumptions. A single PR can be *mixed* — e.g. PR #760 touched `sources/host-ctr/` (first-party) **and** `packages/amazon-vpc-cni-plugins/`, `packages/ecs-agent/` (third-party) — and then needs one entry in each section: ``Replace `amazon-ecr-containerd-resolver` with Docker resolver in `host-ctr` ([#760])`` under OS Changes and ``Update `amazon-vpc-cni-plugins`, `ecs-agent` ([#760])`` under Third Party Package Updates.
+
+Categorisation: **first-party** = Bottlerocket's own code (`sources/`, Bottlerocket-specific packages); **third-party** = external software packaged under `packages/` (glibc, docker-engine, …); **Build Changes** = build system, CI, developer tooling; **Orchestrator Changes** = Kubernetes, ECS or other orchestrator-specific features.
 
 ## Changelog format
 
@@ -62,3 +66,4 @@ Rules:
 - `Twoliter.toml` `release-version` updated; CHANGELOG has the new section with today's date.
 - All entries carry PR references; third-party entries have no versions.
 - Each PR's content was checked with `git show <hash> --stat`.
+- Preparing the release does not push: push the branch and open the PR yourself.

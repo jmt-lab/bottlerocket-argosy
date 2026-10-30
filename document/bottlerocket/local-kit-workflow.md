@@ -25,7 +25,7 @@ Use the repos' Makefile targets rather than calling `twoliter` directly (excepti
 docker run -d --name kit-registry -p 5000:5000 -v kit-registry-data:/var/lib/registry registry:2
 curl -s localhost:5000/v2/_catalog          # {"repositories":[]}
 ```
-Any free port works; use it consistently below.
+Any free port works; use it consistently below. The named volume keeps published kits across `docker stop`/`docker start`; `docker logs -f kit-registry` shows pushes and pulls.
 
 ## Step 2 — build and publish a kit
 
@@ -38,7 +38,9 @@ registry = "localhost:5000"
 make build                             # ARCH=x86_64|aarch64 ; UPSTREAM_SOURCE_FALLBACK=true for restricted sources (e.g. NVIDIA)
 make publish VENDOR=local
 curl -s localhost:5000/v2/_catalog     # kit should appear
+curl -s localhost:5000/v2/<repo>/tags/list   # confirm the published version tag
 ```
+Iterating: after editing packages, rerun `make build` (only changed packages rebuild) and `make publish VENDOR=local`, then re-run Step 3's `twoliter update` in `bottlerocket`.
 Other kit targets: `make fetch`, `make update` (refresh `Twoliter.lock`), `make twoliter <task>` (forward to Twoliter's cargo-make tasks), `make prep` (install pinned Twoliter).
 
 ## Step 3 — point the variant at the local kit
@@ -51,6 +53,7 @@ registry = "localhost:5000"
 ```bash
 ./tools/twoliter/twoliter update       # refresh Twoliter.lock against the override
 ```
+Alternative without an override (the form in `document/core-kit/development` § Publish a kit): declare `[vendor.local] registry = "localhost:5000"` in the variant's `Twoliter.toml` and set that kit's `vendor = "local"`, then `twoliter update`. This edits a tracked file, so revert it before committing.
 
 ## Step 4 — build the variant
 
@@ -86,6 +89,7 @@ Never commit `Infra.toml`, `Twoliter.override`, or a `Twoliter.lock` that resolv
 | variant build: `failed to pull kit` / `kit not found in registry` | check `localhost:5000/v2/_catalog`; ensure `make publish` ran and the `Twoliter.toml` version matches |
 | lock out of sync | rerun `./tools/twoliter/twoliter update` |
 | stale build cache | `rm -rf build/ && make build` |
+| `Docker daemon is not running` | `sudo systemctl start docker` |
 | `connection refused` | registry container not running: `docker start kit-registry` |
 | port already in use | pick another host port and update `Infra.toml` / `Twoliter.override` |
 | docker permission denied | `sudo usermod -aG docker $USER`, re-login |

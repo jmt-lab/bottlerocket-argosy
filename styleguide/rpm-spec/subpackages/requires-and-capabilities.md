@@ -11,6 +11,7 @@ category: subpackages
 - Virtual capabilities: `%{_cross_os}<pkg>(capability)`, e.g. `hostname-imds(binaries)`. Do not require a capability the same package provides; do not add compatibility `Provides` for packages that never existed.
 - Conditional requirements via `%{_cross_os}image-feature(fips)` / `image-feature(no-fips)`; prefer capabilities over version-specific conditionals.
 - `Conflicts:` between mutually exclusive packages.
+- Advertise only what the package really supports: a `Provides:` or feature capability that leads to a runtime failure is worse than a clean rejection at image build time.
 - Kubernetes components are version-suffixed packages that can coexist; package credential providers and plugins (CNI to standard locations) along their real technical relationships.
 
 ## Good

@@ -27,7 +27,7 @@ Twoliter is a **facade over Bottlerocket's cargo-make build system**. The CLI re
 | `src/tools.rs` | `install_tools(dir)`: wipe dir, unpack the embedded tarball, write each embedded binary with mode 0755 and a uniform mtime (taken from `build.Dockerfile`) |
 | `src/cargo_make.rs` | `CargoMake` builder: runs `cargo make --disable-check-for-updates --makefile … --cwd … -e K=V … <task>`; always sets `TLPRIVATE_SDK_IMAGE`, `BUILDSYS_OUTPUT_GENERATION_ID`, `TWOLITER_VERSION`; passes through host env matching `BUILDSYS_*`, `PUBLISH_*`, `REPO_*`, `BOOT_CONFIG*`, `AWS_*` plus an allowlist (`ENV_VARS`); **rejects** `BUILDSYS_SDK_NAME/VERSION`, `BUILDSYS_REGISTRY`, `BUILDSYS_OUTPUT_GENERATION_ID` from the host |
 | `src/compatibility.rs` | `LATEST_TWOLITER_PROJECT_SCHEMA_VERSION = 2`, `SUPPORTED_TWOLITER_LOCK_SCHEMA_VERSION = 2`, `SUPPORTED_KIT_METADATA_VERSION = "v3"` |
-| `src/common.rs` | `exec`/`exec_log` process helpers; `fs` wrappers (its `canonicalize` uses `path_absolutize`, see `document/conventions`) |
+| `src/common.rs` | `exec`/`exec_log` process helpers; `fs` wrappers (its `canonicalize` uses `path_absolutize`, see `document/twoliter/conventions`) |
 
 `twoliter/src/docker/Twoliter.dockerfile` exists but is referenced nowhere — treat as orphaned. `twoliter/Cargo.toml` lists `[build-dependencies]` although the crate has no `build.rs` (vestigial).
 
@@ -56,7 +56,7 @@ Binaries written by `install_tools`: `advisory-checker buildsys pcrsys pipesys t
 | `docker-cargo`, `docker-go` | Run cargo/go in the SDK container for vendoring |
 | `metadata.spec`, `builder-group.spec` | RPM specs generated per build |
 | `waves/*.toml` | Update-wave policies for `pubsys repo` |
-| `tests/*.sh` | Bash unit tests (run via `embedded-bundle/tests/*.rs` wrappers; three scripts have no wrapper — see `document/development`) |
+| `tests/*.sh` | Bash unit tests (run via `embedded-bundle/tests/*.rs` wrappers; three scripts have no wrapper — see `document/twoliter/development`) |
 
 ### Helper crates — `tools/`
 

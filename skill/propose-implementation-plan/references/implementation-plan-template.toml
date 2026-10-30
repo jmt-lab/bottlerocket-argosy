@@ -1,0 +1,45 @@
+# Implementation plan template — drives the implement-commit skill.
+# The driver parses this mechanically; keep it valid TOML.
+
+[meta]
+feature = "feature-name"
+feature_dir = "docs/features/NNNN-feature-name"   # where design.md / test-plan.md live
+workspace = "."                                    # repo checkout the commits go into, relative to where the driver runs
+
+# Dependency graph: commit id -> [ids that must land first]
+[dependencies]
+1 = []
+2 = []
+3 = [1, 2]
+
+# Each commit goes through: designer -> tester -> implementor -> review -> commit
+[[commits]]
+id = 1
+title = "Short description of the change"
+message = "feat(scope): commit message following the repo's commit conventions"
+files = ["path/to/file.rs"]                        # relative to workspace
+acceptance = [
+    "Criterion (CC-N, verified by test_name)",
+]
+anti_patterns = [
+    "What NOT to do (from the design's Critical Constraints)",
+]
+tests = ["test_name_from_test_plan"]               # every test-plan test appears in exactly one commit
+
+[[commits]]
+id = 2
+title = "Another change"
+message = "feat(scope): another commit message"
+files = ["path/to/other.rs"]
+acceptance = []
+anti_patterns = []
+tests = []
+
+[[commits]]
+id = 3
+title = "Change depending on 1 and 2"
+message = "feat(scope): dependent change"
+files = ["path/to/dependent.rs"]
+acceptance = []
+anti_patterns = []
+tests = []

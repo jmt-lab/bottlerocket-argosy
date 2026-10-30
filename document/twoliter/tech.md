@@ -14,7 +14,7 @@ description: Languages, toolchain, runtime requirements, and key dependency vers
 | Unstable cargo features | `bindeps = true`, `profile-hint-mostly-unused = true`; `rustflags = ["-Z", "threads=8"]` | `.cargo/config.toml` |
 | Workspace | `resolver = "2"`, 34 explicit members (21 under `tools/`, `twoliter` + 11 `twoliter/src/tool-crates/*`, `tests/integration-tests`) plus `tools/krane` pulled in as a path dep | root `Cargo.toml` |
 | Release profile | `strip = "debuginfo"`, `lto = "thin"`; `profile.dist` inherits release with `lto = "fat"`, `codegen-units = 1`; AWS SDK crates marked `hint-mostly-unused` | root `Cargo.toml` |
-| Lints | `[workspace.lints.clippy] disallowed_methods = "deny"` + `clippy.toml` disallowed list (see `document/conventions`) | root `Cargo.toml`, `clippy.toml` |
+| Lints | `[workspace.lints.clippy] disallowed_methods = "deny"` + `clippy.toml` disallowed list (see `document/twoliter/conventions`) | root `Cargo.toml`, `clippy.toml` |
 | Release targets | `x86_64-unknown-linux-musl`, `aarch64-unknown-linux-musl` (static) | root `Cargo.toml` `[workspace.metadata.dist]`, `.github/workflows/*.yml` |
 
 ## Runtime requirements (host running `twoliter`)

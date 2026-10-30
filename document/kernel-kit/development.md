@@ -5,7 +5,7 @@ description: How to build, test, lint, publish and maintain the kernel kit — t
 
 # Development
 
-Long-form: `BUILDING.md` (host setup, publishing, consuming), `CONTRIBUTING.md` (PR process). Versions referenced here are owned by `document/tech`.
+Long-form: `BUILDING.md` (host setup, publishing, consuming), `CONTRIBUTING.md` (PR process). Versions referenced here are owned by `document/kernel-kit/tech`.
 
 ## Prerequisites
 
@@ -31,6 +31,8 @@ Long-form: `BUILDING.md` (host setup, publishing, consuming), `CONTRIBUTING.md` 
 | Extract built kernel configs | `tools/collect-kernel-config -o <dir>` | Reads `build/rpms/kernel-*`; script currently loops over 6.1 and 6.12 only |
 | Validate CHANGELOG format | `./tools/validate-changelog.sh` | Same check CI runs |
 
+To test kernel-kit changes in a variant without cloud credentials (local registry + `Twoliter.override`), see `document/bottlerocket/local-kit-workflow`. Bumping the pinned Twoliter or testing a local Twoliter build: `document/twoliter/version-bump-and-local-testing`.
+
 ## Tests and lints (what CI runs on PRs to `develop`)
 
 From `.github/workflows/build.yml`, per arch in `{x86_64, aarch64}` on 32-core runners:
@@ -51,7 +53,7 @@ Other workflows:
 
 | Workflow | Trigger | Does |
 |---|---|---|
-| `commitlint.yml` | PR opened/edited/sync | `npx commitlint -g .commitlint.config.mjs --from base --to head` (rules in `document/conventions`) |
+| `commitlint.yml` | PR opened/edited/sync | `npx commitlint -g .commitlint.config.mjs --from base --to head` (rules in `document/kernel-kit/conventions`) |
 | `validate-changelog.yml` | PR touching `CHANGELOG.md` | `./tools/validate-changelog.sh` |
 | `cache.yml` | push to `develop` | Builds both arches and saves `~/.cargo .cargo .gomodcache build/external-kits build/rpms build/state target` under cache key `build-cache` for PR runs |
 
